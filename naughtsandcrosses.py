@@ -76,6 +76,20 @@ def nextTurn():
 def checkForWinner():
     global currentGameGrid
     thisGameGrid = str(currentGameGrid)
+    if gameLength % 2 == 1:
+        player = "O"
+    else:
+        player = "X"
+    if thisGameGrid.index(str(player)) == 0:
+        if thisGameGrid.index(str(player), 1, 2) == 1:
+            if thisGameGrid.index(str(player), 2, 3) == 2:
+                return True
+        elif thisGameGrid.index(str(player), 3, 4) == 3:
+            if thisGameGrid.index(str(player), 6, 7) == 6:
+                return True
+        elif thisGameGrid.index(str(player), 4, 5) == 4:
+            if thisGameGrid.index(str(player), 8, 9) == 8:
+                return True
 
 
 # game loop starts here
@@ -88,8 +102,11 @@ while not isGameOver:
         hasInput = getInput(currentInput)
     else:
         updateGrid(currentInput)
+        if gameLength >= 5:
+            isGameOver = checkForWinner()
+            print("Testing\n accessing gameover check on turn: " + str(gameLength))
         if isGameOver:
-            print("End of game" + currentTurnVal + "wins!")
+            print("End of game: " + currentTurnVal + " wins!")
             break  # exits game loop
         else:
             nextTurn()
