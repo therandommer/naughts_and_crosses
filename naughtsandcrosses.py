@@ -27,19 +27,16 @@ def startGame():
     currentGameGrid = gameGrid
     print(gameGridText)
     print(currentTurnText)
-    print(instructionText)
 
 
 # Handles the basic logic for getting input to correlate to each square
 def getInput(input):
-    if input.isnumeric():
+    if input.isnumeric() and int(input) > 0 and int(input) < 10:
         print("Input is numeric, do logic")
-    elif input.isnumeric() and input == "0":
-        print("Input is 0, return false")
-    elif input.isnumeric() and input > 9:
-        print("Input is too large, return false")
+        return True
     else:
-        print("Enter a valid number between 1-9, return false")
+        print("Input is not valid, return false")
+        return False
 
 
 # will be called after every valid input, just before the end of game logic if the game is not over
@@ -56,6 +53,7 @@ def nextTurn():
 startGame()
 
 while not isGameOver:
+    print(instructionText)
     currentInput = input()
     getInput(currentInput)
 
